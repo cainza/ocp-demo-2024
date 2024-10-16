@@ -1,0 +1,11 @@
+---
+# DONT USE, JUST FOR Reference
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-bucket-odf
+  namespace: openshift-logging
+spec:
+  generateBucketName: loki-bucket-odf
+  storageClassName: openshift-storage.noobaa.io
+---
