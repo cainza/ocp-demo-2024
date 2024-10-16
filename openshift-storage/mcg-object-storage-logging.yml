@@ -1,0 +1,30 @@
+apiVersion: noobaa.io/v1alpha1
+kind: BackingStore
+metadata:
+  name: demo-logging-backing-store
+  labels:
+    app: noobaa
+spec:
+  pvPool:
+    numVolumes: 1
+    resources:
+      requests:
+        storage: 200Gi
+    secret: {}
+    storageClass: openshift-sc-poc-01
+  type: pv-pool
+---
+apiVersion: noobaa.io/v1alpha1
+kind: BucketClass
+metadata:
+  name: demo-logging-bucket-class
+  namespace: openshift-storage
+  labels:
+    app: noobaa
+spec:
+  placementPolicy:
+    tiers:
+      - backingStores:
+          - demo-logging-backing-store
+        placement: Spread
+---
