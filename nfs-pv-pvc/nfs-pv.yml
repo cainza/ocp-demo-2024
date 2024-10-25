@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-shared-pvc 
+spec:
+  capacity:
+    storage: 5Gi 
+  accessModes:
+  - ReadWriteMany 
+  nfs: 
+    path: /volume1/nfs-shared-volume
+    server: 10.0.0.4
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-shared-pvc
+spec:
+  accessModes:
+    - ReadWriteMany 
+  resources:
+    requests:
+      storage: 5Gi 
+  volumeName: nfs-shared-pvc 
+  storageClassName: ""
